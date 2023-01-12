@@ -1,25 +1,19 @@
 import React, { useState } from "react"
 
-const Heading = ({ heading }) => <h2>{heading}</h2>
-
-const Paragraf =  ({ text, votes }) => (
+const Paragraph =  ({ text, votes }) => (
   <div>
     <p>{text}</p>
     <p>has {votes} votes</p>
   </div>
 )
 
-const Button = ({ handleClick, text }) => (
-  <button onClick={handleClick}>
-    {text}
-  </button>
-)
+const Heading = ({ heading }) => <h2>{heading}</h2>
 
 const MostVotedAnecdote = ({ anecdotes, votes }) => {
-  const maxVotes = Math.max( ...votes )
-  const mostVotedIndex = votes.indexOf(maxVotes)
+  const maxVote = Math.max( ...votes )
+  const mostVotedInd = votes.indexOf(maxVote)
 
-  if (maxVotes === 0) {
+  if (maxVote === 0) {
     return (
       <div>
         <p>no votes yet</p>
@@ -28,9 +22,15 @@ const MostVotedAnecdote = ({ anecdotes, votes }) => {
   }
 
   return (
-    <Paragraf text={anecdotes[mostVotedIndex]} votes={maxVotes} />
+    <Paragraph text={anecdotes[mostVotedInd]} votes={maxVote} />
   )
 }
+
+const Button = ({ handleClick, text }) => (
+  <button onClick={handleClick}>
+    {text}
+  </button>
+)
 
 const App = () => {
   const anecdotes = [
@@ -51,15 +51,15 @@ const App = () => {
     setSelected(random)
   }
   const votedFunc = () => {
-    const updatedVotes = [...votes]
-    updatedVotes[selected] += 1
-    setVoted(updatedVotes)
+    const updatedVote = [...votes]
+    updatedVote[selected] += 1
+    setVoted(updatedVote)
   }
 
   return (
     <div>
       <Heading heading='Anecdote of the day' />
-      <Paragraf text={anecdotes[selected]} votes={votes[selected]} />
+      <Paragraph text={anecdotes[selected]} votes={votes[selected]} />
       <Button handleClick={votedFunc} text='vote' />
       <Button handleClick={selectedFunc} text='next anecdote' />
       <Heading heading='Anecdote with most votes' />
