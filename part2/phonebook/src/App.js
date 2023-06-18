@@ -6,6 +6,7 @@ import Notification from './components/notification'
 
 import axios from 'axios'
 import personService from "./services/personService";
+import './index.css'
 
 const Button = (props) => {
   console.log(props)
